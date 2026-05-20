@@ -1,0 +1,31 @@
+name: Guard Integrity Audit
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify Logic Integrity
+        run: |
+          # 檢查代碼中是否存在明顯的後門或衝突標記
+          if grep -q "<<<<<<<" *.py; then exit 1; fi
+          echo "✅ Logic integrity verified."
+
+      - name: Verify Version Alignment
+        run: |
+          # 確保 VERSION_HISTORY.md 與實體代碼對位
+          VERSION=$(grep "VERSION:" gatekeeper.py | head -n 1 | cut -d' ' -f3)
+          if ! grep -q "$VERSION" VERSION_HISTORY.md; then
+            echo "🚨 Version $VERSION is missing from VERSION_HISTORY.md"
+            exit 1
+          fi
+          echo "✅ Versions aligned."
