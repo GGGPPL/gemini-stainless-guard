@@ -7,3 +7,4 @@
 | 2026-05-20 | iron_replace.py | 1.0.0 | **RESET**: Alignment to v1 baseline. |
 | 2026-05-20 | gatekeeper.py | 1.0.0 | **RESET**: Alignment to v1 baseline. Fixed Tag format for iron_replace compatibility. |
 | 2026-05-20 | watchman_sensor.py | 1.0.0 | **RESET**: Alignment to v1 baseline. |
+| 2026-05-20 | CLOUD_JUDGE | ACTIVE | **SOP**: Branch Protection activation triggered. |
